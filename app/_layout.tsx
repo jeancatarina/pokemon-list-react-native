@@ -9,8 +9,8 @@ import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
 import { useEffect } from "react"
 import { useColorScheme } from "react-native"
-import { client } from "./config/Apollo"
-import { useLoadGlobalData } from "./services/hooks/useLoadGlobalData"
+import { client } from "../config/Apollo"
+import { useLoadGlobalData } from "../services/hooks/useLoadGlobalData"
 
 export {
 	// Catch any errors thrown by the Layout component.

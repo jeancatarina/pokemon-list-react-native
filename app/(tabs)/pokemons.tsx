@@ -1,12 +1,14 @@
-import { FlatList, StyleSheet } from "react-native"
+import { ActivityIndicator, Button, FlatList, StyleSheet } from "react-native"
 
-import { Card } from "../components/Card"
-import { Text, View } from "../components/Themed"
-import { useQuery, gql } from "@apollo/client"
+import { Card } from "../../components/Card"
+import { Text, View } from "../../components/Themed"
+import { useQuery, gql, NetworkStatus } from "@apollo/client"
+import { useState } from "react"
+import { Link, useRouter } from "expo-router"
 
 const GET_POKEMONS = gql`
-	query Pokemon_v2_pokemon($limit: Int) {
-	pokemon_v2_pokemon(limit: $limit) {
+	query GetPokemons($offset: Int, $limit: Int) {
+	pokemon_v2_pokemon(offset: $offset, limit: $limit) {
 	  name
 	  id
 	  height
@@ -18,32 +20,62 @@ const GET_POKEMONS = gql`
 `
 
 export default function TabOneScreen() {
-	const pokemonData = [
-		{ id: 1, title: "pikachu" },
-		{ id: 2, title: "charmander" },
-	]
+	const [limit, setLimit] = useState(5);
+	const [offset, setOffset] = useState(0);
+	const router = useRouter();
+	const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_POKEMONS, {
+		variables: { limit, offset },
+		fetchPolicy: 'network-only',
+		notifyOnNetworkStatusChange: true
+	});
+	console.log("🚀 ~ TabOneScreen ~ loading:", loading)
+	const pokemonData = data?.pokemon_v2_pokemon
+
+	// if (networkStatus !== NetworkStatus.ready) {
+	// 	return <Text>loading...</Text>
+	// }
+
+	if (error) {
+		return <Text>Ops, erro ao buscar pokemons</Text>
+	}
+
+	const handleLoadMore = () => {
+		fetchMore({
+			variables: {
+				offset: data?.pokemon_v2_pokemon?.length
+			},
+		});
+
+		setOffset(data?.pokemon_v2_pokemon?.length + limit);
+	};
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Lista de Pokemons</Text>
-			<View
-				style={styles.separator}
-				lightColor="#eee"
-				darkColor="rgba(255,255,255,0.1)"
-			/>
 			<FlatList
 				data={pokemonData}
 				style={styles.view}
 				renderItem={({ item }) => (
-					<Card>
-						<Text>{item.title}</Text>
+					<Card
+						onPress={
+							() => router.push({ pathname: "/pokemon/[id]", params: { id: item.id } })
+						}
+					>
+						<Text>
+							{`${item.id} - ${item.name}`}
+						</Text>
 					</Card>
 				)}
 				keyExtractor={(item) => item?.id?.toString()}
-				// onEndReached={handleLoadMore}
+				onEndReached={handleLoadMore}
 				onEndReachedThreshold={0.5}
 				contentContainerStyle={{ padding: 10 }}
-			// ListFooterComponent={isLoading && hasMore ? <ActivityIndicator /> : null}
+				ListFooterComponent={
+					loading ? (
+						<ActivityIndicator />
+					) : (
+						<Button title="Carregar Mais" onPress={handleLoadMore} />
+					)
+				}
 			/>
 		</View>
 	)
