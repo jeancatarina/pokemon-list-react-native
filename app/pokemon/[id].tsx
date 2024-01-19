@@ -1,16 +1,10 @@
-import { useLocalSearchParams } from 'expo-router';
+import PokemonDetails from 'pages/PokemonDetails/PokemonDetails';
 import React from 'react';
-import { Text, View } from 'react-native';
 
-const PokemonDetails = () => {
-	const params = useLocalSearchParams();
-	const { id } = params;
-
+const Pokemon = () => {
 	return (
-		<View>
-			<Text>Pokemon Details for ID: {id}</Text>
-		</View>
+		<PokemonDetails />
 	);
 };
 
-export default PokemonDetails;
+export default Pokemon;
