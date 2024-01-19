@@ -1,9 +1,10 @@
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 import { GET_POKEMON_DETAIL } from './query';
 import { useQuery } from '@apollo/client';
 import { Card } from 'components/Card';
+import { styles } from './styles';
 
 const PokemonDetails = () => {
 	const params = useLocalSearchParams();
@@ -16,6 +17,8 @@ const PokemonDetails = () => {
 	const currentPokemon = data?.pokemon_v2_pokemon_by_pk
 	const currentPokemonType = currentPokemon?.pokemon_v2_pokemontypes
 	const currentPokemonStats = currentPokemon?.pokemon_v2_pokemonstats
+	const currentPokemonSprites = currentPokemon?.pokemon_v2_pokemonsprites
+	console.log("🚀 ~ PokemonDetails ~ currentPokemonSprites:", currentPokemonSprites?.[0].sprites?.other?.["official-artwork"].front_default)
 
 	const typeList = currentPokemonType?.map(
 		(pokemonType) => {
@@ -34,8 +37,6 @@ const PokemonDetails = () => {
 	)
 
 
-	console.log("🚀 ~ PokemonDetails ~ typeList:", typeList)
-
 	return (
 		<View>
 			<Card>
@@ -43,6 +44,12 @@ const PokemonDetails = () => {
 			</Card>
 			<Card>
 				<Text>Foto: </Text>
+				<Image
+					style={styles.image}
+					source={{
+						uri: currentPokemonSprites?.[0].sprites?.other?.["official-artwork"].front_default,
+					}}
+				/>
 			</Card>
 			<Card>
 				<Text>Tipos: </Text>

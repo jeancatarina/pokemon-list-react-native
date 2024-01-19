@@ -18,6 +18,9 @@ export const GET_POKEMON_DETAIL = gql`
 					name
 				}
 			}
+			pokemon_v2_pokemonsprites {
+				sprites
+			}
 		}
 	}
 `
