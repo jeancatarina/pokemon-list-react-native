@@ -13,7 +13,9 @@ export const Card: FC<CardProps> = ({ children, onPress }) => {
 const styles = StyleSheet.create({
 	card: {
 		flexGrow: 1,
-		margin: 15,
+		marginBottom: 12,
+		marginLeft: 15,
+		marginRight: 15,
 		padding: 15,
 		borderRadius: 10,
 		borderWidth: 1,
