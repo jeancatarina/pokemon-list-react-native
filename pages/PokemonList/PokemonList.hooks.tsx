@@ -1,10 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Button } from "react-native";
-import { Card } from "../../components/Card";
-import { Text, View } from "../../components/Themed";
-import { GET_POKEMONS } from "./query";
+import { GET_POKEMONS } from "./PokemonList.query";
 
 const usePokemonList = () => {
 	const [limit, setLimit] = useState(5);
@@ -38,11 +35,15 @@ const usePokemonList = () => {
 	};
 
 	return {
-		loading,
-		error,
-		pokemonData,
-		handleLoadMore,
-		navigateToPokemonDetail,
+		data: {
+			loading,
+			error,
+			pokemonData,
+		},
+		handlers: {
+			handleLoadMore,
+			navigateToPokemonDetail,
+		}
 	};
 };
 
