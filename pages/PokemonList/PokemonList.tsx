@@ -3,7 +3,7 @@ import { ActivityIndicator, Button, FlatList } from "react-native"
 import { Text, View } from "../../components/Themed"
 import usePokemonList from "./PokemonList.hooks"
 import { styles } from "./styles"
-import { Card } from "components/Card";
+import { Card } from "../../components/Card";
 
 export default function PokemonList() {
 	const {

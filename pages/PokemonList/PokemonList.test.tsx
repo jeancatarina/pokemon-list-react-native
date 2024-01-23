@@ -2,7 +2,8 @@
 import React from 'react';
 import { create, act } from 'react-test-renderer';
 import PokemonList from './PokemonList';
-import Apollo from '@apollo/client';
+import * as Apollo from '@apollo/client';
+import { ActivityIndicator } from 'react-native';
 
 jest.mock('expo-router', () => ({
 	useRouter: () => ({ push: jest.fn() }),
@@ -15,8 +16,6 @@ const makeSUT = () => {
 		<PokemonList />
 	)
 
-
-
 	return {
 		component: create(<ComponentToRender />),
 	}
@@ -24,18 +23,25 @@ const makeSUT = () => {
 
 describe('PokemonList', () => {
 	it('Should render loading state', async () => {
-		// jest.spyOn(Apollo, "useQuery").mockReturnValue(
-		// 	{ loading: true }
-		// );
+		jest.spyOn(Apollo, "useQuery").mockReturnValue(
+			{
+				data: null,
+				loading: true,
+				error: undefined,
+				fetchMore: jest.fn(),
+				networkStatus: 1,
+			} as unknown as Apollo.QueryResult<unknown, Apollo.OperationVariables>
+		);
 
 		await act(async () => {
-			const { component } = makeSUT()
+			const { component } = await makeSUT()
 
 			const tree = component.toJSON();
+			const instance = component?.root
+			const activityIndicator = instance.findByType(ActivityIndicator);
 
-			expect(tree).toMatchSnapshot();
+			expect(activityIndicator).toBeDefined();
 		});
-
 
 	});
 
