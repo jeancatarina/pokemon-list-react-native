@@ -1,13 +1,15 @@
 
-import React from 'react';
-import { create, act } from 'react-test-renderer';
-import PokemonList from './PokemonList';
 import * as Apollo from '@apollo/client';
-import { ActivityIndicator } from 'react-native';
+import { render, screen, waitFor } from "@testing-library/react-native";
+import React from 'react';
+import PokemonList from './PokemonList';
+import * as PokemonHooks from "./PokemonList.hooks";
 
 jest.mock('expo-router', () => ({
 	useRouter: () => ({ push: jest.fn() }),
 }));
+
+jest.mock('./PokemonList.hooks');
 
 afterEach(() => jest.clearAllMocks())
 
@@ -17,75 +19,84 @@ const makeSUT = () => {
 	)
 
 	return {
-		component: create(<ComponentToRender />),
+		component: render(<ComponentToRender />),
 	}
 }
 
 describe('PokemonList', () => {
 	it('Should render loading state', async () => {
-		jest.spyOn(Apollo, "useQuery").mockReturnValue(
+		jest.spyOn(PokemonHooks, "usePokemonList").mockReturnValue(
 			{
-				data: null,
-				loading: true,
-				error: undefined,
-				fetchMore: jest.fn(),
-				networkStatus: 1,
-			} as unknown as Apollo.QueryResult<unknown, Apollo.OperationVariables>
+				data: {
+					loading: true,
+					error: undefined,
+					pokemonData: null,
+				},
+				handlers: {
+					handleLoadMore: jest.fn(),
+					navigateToPokemonDetail: jest.fn(),
+				}
+			}
 		);
 
-		await act(async () => {
-			const { component } = await makeSUT()
+		const { component } = makeSUT()
 
-			const instance = component?.root
-			const activityIndicator = instance.findByType(ActivityIndicator);
+		screen.debug()
+		console.log("🚀 ~ it ~ root:", component.toJSON())
 
-			expect(activityIndicator).toBeDefined();
-		});
+		const loading = screen.getByTestId('loading-indicator');
+
+		await waitFor(() => {
+			expect(loading).toBeTruthy()
+		})
 
 	});
 
 	it('Should render error state', async () => {
-		jest.spyOn(Apollo, "useQuery").mockReturnValue({
-			data: null,
-			loading: true,
-			error: new Error('Failed to fetch data'),
-			fetchMore: jest.fn(),
-			networkStatus: 1,
-		} as unknown as Apollo.QueryResult<unknown, Apollo.OperationVariables>
+		jest.spyOn(PokemonHooks, "usePokemonList").mockReturnValue(
+			{
+				data: {
+					loading: false,
+					error: new Error('Failed to fetch data') as unknown as Apollo.ApolloError,
+					pokemonData: null,
+				},
+				handlers: {
+					handleLoadMore: jest.fn(),
+					navigateToPokemonDetail: jest.fn(),
+				}
+			}
 		);
 
-		await act(async () => {
-			const { component } = await makeSUT()
+		makeSUT()
 
-			const tree = component.toJSON();
-			const instance = component?.root
-			const textComponents = instance.findAllByProps({ children: 'Ops, erro ao buscar pokemons' });
-			console.log(tree)
-			expect(textComponents.length).toBeGreaterThan(0);
-		});
+		const text = screen.getByText(/Ops, erro ao buscar pokemons/i)
+
+		await waitFor(() => {
+			expect(text).toBeTruthy()
+		})
 	});
 
-	// it('Should render with data', async () => {
-	// 	const mockData = {
-	// 		loading: false,
-	// 		error: null,
-	// 		data: {
-	// 			pokemon_v2_pokemon: [
-	// 			],
-	// 		},
-	// 		fetchMore: jest.fn(),
-	// 	};
+	it('Should render with data', async () => {
+		jest.spyOn(PokemonHooks, "usePokemonList").mockReturnValue(
+			{
+				data: {
+					loading: false,
+					error: undefined,
+					pokemonData: [{ id: 1, name: 'Pikachu' }],
+				},
+				handlers: {
+					handleLoadMore: jest.fn(),
+					navigateToPokemonDetail: jest.fn(),
+				}
+			}
+		);
 
-	// 	jest.spyOn(Apollo, "useQuery").mockReturnValue(mockData);
+		makeSUT()
 
-	// 	let component;
+		const text = screen.getByText(/pikachu/i)
 
-	// 	await act(async () => {
-	// 		component = create(<PokemonList />);
-	// 	});
-
-	// 	const tree = component.toJSON();
-
-	// 	expect(tree).toMatchSnapshot();
-	// });
+		await waitFor(() => {
+			expect(text).toBeTruthy()
+		})
+	});
 })

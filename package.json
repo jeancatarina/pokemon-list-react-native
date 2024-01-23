@@ -14,7 +14,8 @@
 		"preset": "jest-expo",
 		"transformIgnorePatterns": [
 			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
-		]
+		],
+		"setupFilesAfterEnv": ["<rootDir>/config/setupTests.ts"]
 	},
 	"dependencies": {
 		"@apollo/client": "^3.8.9",
@@ -43,6 +44,8 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@biomejs/biome": "1.5.2",
+		"@testing-library/jest-dom": "^6.2.1",
+		"@testing-library/react-native": "^12.4.3",
 		"@types/babel__core": "~7.20.5",
 		"@types/css-tree": "~2.3.5",
 		"@types/jest": "^29.5.11",

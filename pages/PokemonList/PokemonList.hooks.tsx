@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { GET_POKEMONS } from "./PokemonList.query";
 
-const usePokemonList = () => {
+export const usePokemonList = () => {
 	const [limit, setLimit] = useState(5);
 	const [offset, setOffset] = useState(0);
 	const router = useRouter();

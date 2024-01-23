@@ -29,7 +29,7 @@ export default function PokemonList() {
 	)
 
 	const getListFooter = () =>
-		loading ? <ActivityIndicator /> : <Button title="Carregar Mais" onPress={handleLoadMore} />
+		loading ? <ActivityIndicator testID="loading-indicator" /> : <Button title="Carregar Mais" onPress={handleLoadMore} />
 
 	return (
 		<View style={styles.container}>
