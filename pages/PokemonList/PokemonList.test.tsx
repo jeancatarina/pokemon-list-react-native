@@ -36,7 +36,6 @@ describe('PokemonList', () => {
 		await act(async () => {
 			const { component } = await makeSUT()
 
-			const tree = component.toJSON();
 			const instance = component?.root
 			const activityIndicator = instance.findByType(ActivityIndicator);
 
@@ -45,19 +44,26 @@ describe('PokemonList', () => {
 
 	});
 
-	// it('Should render error state', async () => {
-	// 	jest.spyOn(Apollo, "useQuery").mockReturnValue({ loading: false, error: new Error('Failed to fetch data') });
+	it('Should render error state', async () => {
+		jest.spyOn(Apollo, "useQuery").mockReturnValue({
+			data: null,
+			loading: true,
+			error: new Error('Failed to fetch data'),
+			fetchMore: jest.fn(),
+			networkStatus: 1,
+		} as unknown as Apollo.QueryResult<unknown, Apollo.OperationVariables>
+		);
 
-	// 	let component;
+		await act(async () => {
+			const { component } = await makeSUT()
 
-	// 	await act(async () => {
-	// 		component = create(<PokemonList />);
-	// 	});
-
-	// 	const tree = component.toJSON();
-
-	// 	expect(tree).toMatchSnapshot();
-	// });
+			const tree = component.toJSON();
+			const instance = component?.root
+			const textComponents = instance.findAllByProps({ children: 'Ops, erro ao buscar pokemons' });
+			console.log(tree)
+			expect(textComponents.length).toBeGreaterThan(0);
+		});
+	});
 
 	// it('Should render with data', async () => {
 	// 	const mockData = {
