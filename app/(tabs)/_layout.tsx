@@ -25,7 +25,7 @@ export default function TabLayout() {
 			}}
 		>
 			<Tabs.Screen
-				name="pokemons"
+				name="index"
 				options={{
 					title: "Pokemons",
 					tabBarIcon: ({ color }) => (

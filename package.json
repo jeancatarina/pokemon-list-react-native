@@ -15,12 +15,15 @@
 		"transformIgnorePatterns": [
 			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
 		],
-		"setupFilesAfterEnv": ["<rootDir>/config/setupTests.ts"]
+		"setupFilesAfterEnv": [
+			"<rootDir>/config/setupTests.ts"
+		]
 	},
 	"dependencies": {
 		"@apollo/client": "^3.8.9",
 		"@expo/vector-icons": "^13.0.0",
 		"@react-navigation/native": "^6.0.2",
+		"@shopify/flash-list": "1.4.3",
 		"css-select": "^5.1.0",
 		"css-tree": "^2.3.1",
 		"expo": "~49.0.15",

@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GET_POKEMONS } from "./PokemonList.query";
 
 export const usePokemonList = () => {
@@ -30,9 +30,15 @@ export const usePokemonList = () => {
 		setOffset(data?.pokemon_v2_pokemon?.length + limit);
 	};
 
-	const navigateToPokemonDetail = (itemId) => {
-		router.push({ pathname: "/pokemon/[id]", params: { id: itemId } });
-	};
+
+
+
+	const navigateToPokemonDetail = useCallback(
+		(itemId) => {
+			router.push({ pathname: "/pokemon/[id]", params: { id: itemId } });
+		},
+		[router],
+	)
 
 	return {
 		data: {

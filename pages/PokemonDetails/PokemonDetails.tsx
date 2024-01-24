@@ -47,7 +47,7 @@ const PokemonDetails = () => {
 	))
 
 	return (
-		<ScrollView>
+		<ScrollView style={styles.container}>
 			{getName()}
 			{getImage()}
 			{getTypes()}
