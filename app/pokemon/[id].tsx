@@ -1,10 +1,8 @@
-import PokemonDetails from 'pages/PokemonDetails/PokemonDetails';
-import React from 'react';
+import PokemonDetails from "pages/PokemonDetails/PokemonDetails"
+import React from "react"
 
 const Pokemon = () => {
-	return (
-		<PokemonDetails />
-	);
-};
+	return <PokemonDetails />
+}
 
-export default Pokemon;
+export default Pokemon

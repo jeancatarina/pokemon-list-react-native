@@ -1,9 +1,5 @@
-
-import PokemonList from '../../pages/PokemonList/PokemonList'
+import PokemonList from "../../pages/PokemonList/PokemonList"
 
 export default function TabOneScreen() {
-	return (
-		<PokemonList />
-	)
+	return <PokemonList />
 }
-

@@ -3,25 +3,18 @@ import { ActivityIndicator, Button, FlatList } from "react-native"
 import { Text, View } from "../../components/Themed"
 import usePokemonList from "./PokemonList.hooks"
 import { styles } from "./styles"
-import { Card } from "../../components/Card";
-import { useCallback } from "react";
-import { FlashList } from "@shopify/flash-list";
+import { Card } from "../../components/Card"
+import { useCallback } from "react"
+import { FlashList } from "@shopify/flash-list"
 
 export default function PokemonList() {
 	const {
-		data: {
-			loading,
-			error,
-			pokemonData,
-		},
-		handlers: {
-			handleLoadMore,
-			navigateToPokemonDetail,
-		}
-	} = usePokemonList();
+		data: { loading, error, pokemonData },
+		handlers: { handleLoadMore, navigateToPokemonDetail },
+	} = usePokemonList()
 
 	if (error) {
-		return <Text>Ops, erro ao buscar pokemons</Text>;
+		return <Text>Ops, erro ao buscar pokemons</Text>
 	}
 
 	const getlistItem = useCallback(
@@ -34,7 +27,11 @@ export default function PokemonList() {
 	)
 
 	const getListFooter = () =>
-		loading ? <ActivityIndicator testID="loading-indicator" /> : <Button title="Carregar Mais" onPress={handleLoadMore} />
+		loading ? (
+			<ActivityIndicator testID="loading-indicator" />
+		) : (
+			<Button title="Carregar Mais" onPress={handleLoadMore} />
+		)
 
 	return (
 		<View style={styles.container}>
@@ -51,6 +48,5 @@ export default function PokemonList() {
 				/>
 			</View>
 		</View>
-	);
+	)
 }
-

@@ -8,5 +8,11 @@
 		"**/Thumbs.db": true,
 		"**/node_modules": false,
 		"**/*.code-search": true
-	}
+	},
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": true,
+		"source.organizeImports.biome": true,
+		"source.fixAll": "always"
+	},
+	"editor.defaultFormatter": "biomejs.biome"
 }

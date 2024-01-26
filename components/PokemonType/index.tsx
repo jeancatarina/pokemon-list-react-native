@@ -1,1 +1,1 @@
-export * from './PokemonType'
+export * from "./PokemonType"

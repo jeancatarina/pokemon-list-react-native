@@ -1,13 +1,21 @@
 import { FC } from "react"
 import { Text, View } from "../Themed"
-import { StyleSheet, TouchableOpacity, TouchableOpacityProps } from "react-native"
+import {
+	StyleSheet,
+	TouchableOpacity,
+	TouchableOpacityProps,
+} from "react-native"
 
 interface CardProps extends TouchableOpacityProps {
 	children: React.ReactNode
 }
 
 export const Card: FC<CardProps> = ({ children, onPress }) => {
-	return <TouchableOpacity onPress={onPress} style={styles.card}>{children}</TouchableOpacity>
+	return (
+		<TouchableOpacity onPress={onPress} style={styles.card}>
+			{children}
+		</TouchableOpacity>
+	)
 }
 
 const styles = StyleSheet.create({
