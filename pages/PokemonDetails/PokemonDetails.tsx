@@ -1,8 +1,8 @@
-import { Card } from 'components/Card';
+import { Card } from '../../components/Card';
 import React from 'react';
-import { Image, ScrollView, Text } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text } from 'react-native';
 
-import { PokemonType } from 'components/PokemonType';
+import { PokemonType } from '../../components/PokemonType';
 import usePokemonDetails from './PokemonDetails.hooks';
 import { styles } from './styles';
 
@@ -46,12 +46,24 @@ const PokemonDetails = () => {
 		</Card>
 	))
 
+	const getBody = () => {
+		return loading ?
+			<ActivityIndicator testID="loading-indicator" /> :
+			<>
+				{getName()}
+				{getImage()}
+				{getTypes()}
+				{getStats()}
+			</>
+	}
+
+	if (error) {
+		return <Text>Ops, erro ao buscar esse pokemon</Text>;
+	}
+
 	return (
 		<ScrollView style={styles.container}>
-			{getName()}
-			{getImage()}
-			{getTypes()}
-			{getStats()}
+			{getBody()}
 		</ScrollView>
 	);
 };

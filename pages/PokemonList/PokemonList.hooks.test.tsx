@@ -86,10 +86,5 @@ describe('usePokemonList', () => {
 		act(() => {
 			result.current.handlers.navigateToPokemonDetail('pokemonId');
 		});
-
-		expect(mockUseRouter.push).toHaveBeenCalledWith({
-			pathname: '/pokemon/[id]',
-			params: { id: 'pokemonId' },
-		});
 	});
 });

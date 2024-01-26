@@ -3,7 +3,7 @@ import { useLocalSearchParams } from 'expo-router';
 
 import { GET_POKEMON_DETAIL } from './PokemonDetails.query';
 
-const usePokemonDetails = () => {
+export const usePokemonDetails = () => {
 	const params = useLocalSearchParams();
 	const { id } = params;
 	const { loading, error, data, fetchMore, networkStatus } = useQuery(GET_POKEMON_DETAIL, {
