@@ -1,0 +1,11 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  continuous-integration:
+    uses: ./.github/workflows/dev-ci-front.yaml
+    secrets: inherit

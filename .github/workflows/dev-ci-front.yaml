@@ -1,0 +1,74 @@
+name: Dev CI Frontend
+
+on:
+  workflow_call:
+    inputs:
+      lint_command:
+        default: lint
+        type: string
+      test_command:
+        default: test:unit-ci
+        type: string
+      node_version:
+        type: number
+        default: 16
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  HUSKY: 0
+
+jobs:
+  lint:
+    name: Yarn Lint
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node_version }}
+
+
+    - name: Get Cache
+      uses: actions/cache@v3
+      with:
+        path: .yarn
+        key: cache-node-yarn-${{ hashFiles('yarn.lock') }}
+
+
+    - name: Install Node Modules
+      run: yarn install --cache-folder .yarn --frozen-lockfile --ignore-scripts --ignore-engines --non-interactive --silent
+
+
+    - name: Yarn Lint
+      run: yarn ${{ inputs.lint_command }}
+  test:
+    name: Yarn Test
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node_version }}
+
+
+    - name: Get Cache
+      uses: actions/cache@v3
+      with:
+        path: .yarn
+        key: cache-node-yarn-${{ hashFiles('yarn.lock') }}
+
+
+    - name: Install Node Modules
+      run: yarn install --cache-folder .yarn --frozen-lockfile --ignore-scripts --ignore-engines --non-interactive --silent
+
+
+    - name: Yarn Test
+      run: yarn ${{ inputs.test_command }}

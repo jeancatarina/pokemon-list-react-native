@@ -8,6 +8,7 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"test": "jest --watchAll",
+		"test-ci": "jest --ci",
 		"postinstall": "npx typesync"
 	},
 	"jest": {
@@ -15,9 +16,7 @@
 		"transformIgnorePatterns": [
 			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
 		],
-		"setupFilesAfterEnv": [
-			"<rootDir>/config/setupTests.ts"
-		]
+		"setupFilesAfterEnv": ["<rootDir>/config/setupTests.ts"]
 	},
 	"dependencies": {
 		"@apollo/client": "^3.8.9",
