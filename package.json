@@ -8,8 +8,11 @@
 		"ios": "expo start --ios",
 		"web": "expo start --web",
 		"test": "jest --watchAll",
-		"test-ci": "jest --ci",
-		"postinstall": "npx typesync"
+		"test:unit-ci": "jest --ci",
+		"postinstall": "npx typesync",
+		"lint": "npx @biomejs/biome lint .",
+		"check": "npx @biomejs/biome check --apply .",
+		"format": "npx @biomejs/biome format . --write"
 	},
 	"jest": {
 		"preset": "jest-expo",
