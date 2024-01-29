@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       lint_command:
-        default: lint
+        default: npx @biomejs/biome lint .
         type: string
       test_command:
         default: test:unit-ci
