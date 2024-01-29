@@ -19,7 +19,7 @@ env:
 
 jobs:
   lint:
-    name: Yarn Lint
+    name: Lint
     runs-on: ubuntu-latest
     steps:
 
@@ -43,8 +43,8 @@ jobs:
       run: yarn install --cache-folder .yarn --frozen-lockfile --ignore-scripts --ignore-engines --non-interactive --silent
 
 
-    - name: Yarn Lint
-      run: yarn ${{ inputs.lint_command }}
+    - name: Lint Files
+      run: ${{ inputs.lint_command }}
   test:
     name: Yarn Test
     runs-on: ubuntu-latest
