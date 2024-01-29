@@ -1,5 +1,4 @@
 import { FC } from "react"
-import { Text, View } from "../Themed"
 import {
 	StyleSheet,
 	TouchableOpacity,
