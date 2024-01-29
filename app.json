@@ -3,6 +3,7 @@
 		"name": "pokemon-list",
 		"slug": "pokemon-list",
 		"version": "1.0.0",
+		"owner": "jean",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
 		"scheme": "myapp",
