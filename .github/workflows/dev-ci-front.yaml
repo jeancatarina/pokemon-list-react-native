@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       lint_command:
-        default: npx @biomejs/biome lint .
+        default: lint
         type: string
       test_command:
         default: test:unit-ci
@@ -19,7 +19,7 @@ env:
 
 jobs:
   lint:
-    name: Lint
+    name: Yarn Lint
     runs-on: ubuntu-latest
     steps:
 
@@ -43,8 +43,8 @@ jobs:
       run: yarn install --cache-folder .yarn --frozen-lockfile --ignore-scripts --ignore-engines --non-interactive --silent
 
 
-    - name: Lint Files
-      run: ${{ inputs.lint_command }}
+    - name: Yarn Lint
+      run: yarn ${{ inputs.lint_command }}
   test:
     name: Yarn Test
     runs-on: ubuntu-latest

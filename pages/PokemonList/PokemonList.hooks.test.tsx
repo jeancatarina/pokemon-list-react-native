@@ -1,7 +1,7 @@
-import { act, renderHook } from "@testing-library/react-native"
-import { usePokemonList } from "./PokemonList.hooks"
 import * as ApolloClient from "@apollo/client"
+import { act, renderHook } from "@testing-library/react-native"
 import * as ExpoRouter from "expo-router"
+import { usePokemonList } from "./PokemonList.hooks"
 
 jest.mock("expo-router", () => {
 	return {
@@ -31,8 +31,8 @@ describe("usePokemonList", () => {
 			error: null,
 			data: mockData,
 			fetchMore: jest.fn(),
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} as unknown as ApolloClient.QueryResult<
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			any,
 			ApolloClient.OperationVariables
 		>
@@ -52,8 +52,8 @@ describe("usePokemonList", () => {
 			error: null,
 			data: mockData,
 			fetchMore: jest.fn(),
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} as unknown as ApolloClient.QueryResult<
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			any,
 			ApolloClient.OperationVariables
 		>
@@ -84,8 +84,8 @@ describe("usePokemonList", () => {
 			error: null,
 			data: mockData,
 			fetchMore: jest.fn(),
-			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} as unknown as ApolloClient.QueryResult<
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 			any,
 			ApolloClient.OperationVariables
 		>

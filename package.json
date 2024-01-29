@@ -9,7 +9,10 @@
 		"web": "expo start --web",
 		"test": "jest --watchAll",
 		"test-ci": "jest --ci",
-		"postinstall": "npx typesync"
+		"postinstall": "npx typesync",
+		"lint": "npx @biomejs/biome lint .",
+		"check": "npx @biomejs/biome check --apply .",
+		"format": "npx @biomejs/biome format . --write"
 	},
 	"jest": {
 		"preset": "jest-expo",
