@@ -15,7 +15,6 @@
 	"submit": {
 		"production": {
 			"android": {
-				"serviceAccountKeyPath": "./config/pokemon-list-412813-b3b2f5ba8460.json",
 				"track": "internal"
 			}
 		}
