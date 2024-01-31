@@ -2,7 +2,7 @@
 	"expo": {
 		"name": "pokemon-list",
 		"slug": "pokemon-list",
-		"version": "1.0.1",
+		"version": "1.0.2",
 		"owner": "jeancatarina",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
@@ -15,14 +15,16 @@
 		},
 		"assetBundlePatterns": ["**/*"],
 		"ios": {
-			"supportsTablet": true
+			"supportsTablet": true,
+			"buildNumber": 2
 		},
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/images/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "com.jeancatarina.pokemonlist"
+			"package": "com.jeancatarina.pokemonlist",
+			"versionCode": 2
 		},
 		"web": {
 			"bundler": "metro",

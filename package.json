@@ -12,7 +12,8 @@
 		"postinstall": "npx typesync",
 		"lint": "npx @biomejs/biome lint .",
 		"check": "npx @biomejs/biome check --apply .",
-		"format": "npx @biomejs/biome format . --write"
+		"format": "npx @biomejs/biome format . --write",
+		"submit": "eas build --profile production --local -p android && bun run scripts/submitAndroid.ts"
 	},
 	"jest": {
 		"preset": "jest-expo",
