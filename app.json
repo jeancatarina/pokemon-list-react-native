@@ -16,7 +16,7 @@
 		"assetBundlePatterns": ["**/*"],
 		"ios": {
 			"supportsTablet": true,
-			"buildNumber": 2
+			"buildNumber": "2"
 		},
 		"android": {
 			"adaptiveIcon": {
@@ -24,7 +24,7 @@
 				"backgroundColor": "#ffffff"
 			},
 			"package": "com.jeancatarina.pokemonlist",
-			"versionCode": 2
+			"versionCode": "2"
 		},
 		"web": {
 			"bundler": "metro",
