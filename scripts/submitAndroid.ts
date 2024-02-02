@@ -1,11 +1,11 @@
-import { exec } from 'node:child_process';
-import { readdir } from 'node:fs/promises';
-import { join } from 'node:path';
+const { exec } = require('child_process');
+const { readdir } = require('fs/promises');
+const { join } = require('path');
 
 const DIR = '.';
 const PREFIX = 'build-';
 
-async function getLatestBuild(): Promise<string | null> {
+async function getLatestBuild() {
 	try {
 		const fileNames = await readdir(DIR);
 		const buildFiles = fileNames.filter((fileName) => fileName.startsWith(PREFIX));
