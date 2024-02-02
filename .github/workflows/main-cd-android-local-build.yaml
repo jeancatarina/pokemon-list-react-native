@@ -52,9 +52,6 @@ jobs:
           ~/android/gradle/wrapper
         key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-    - name: Make gradlew executable
-      run: chmod +x ./android/gradlew
-
     - uses: expo/expo-github-action@v8
       with:
         eas-version: latest
@@ -66,6 +63,9 @@ jobs:
 
     - name: Build Android Local APK Bundle
       run: yarn ${{ inputs.build_command }}
+
+    - name: Make gradlew executable
+      run: chmod +x ./android/gradlew
 
   Push-to-Playstore:
     needs: [Build-for-android]
