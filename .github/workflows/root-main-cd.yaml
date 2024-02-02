@@ -3,5 +3,5 @@ on:
     branches: [main]
 jobs:
   continuous-deployment-main:
-    uses: ./.github/workflows/main-cd-android.yaml
+    uses: ./.github/workflows/main-cd-android-local-build.yaml
     secrets: inherit

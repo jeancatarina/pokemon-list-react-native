@@ -1,0 +1,71 @@
+name: Main CD Frontend
+
+on:
+  workflow_call:
+    inputs:
+      java_version:
+        default: 9.0.4
+        type: string
+      java_package:
+        default: jdk
+        type: string
+      expo_version:
+        default: 3.x
+        type: string
+      node_version:
+        type: number
+        default: 16
+      architecture_type:
+        type: string
+        default: x64
+      build_command:
+        type: string
+        default: build:android-local
+      submit_command:
+        type: string
+        default: submit:android-local
+jobs:
+  Build-for-android:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ inputs.node_version }}
+    - uses: actions/setup-java@v1.4.3
+      with:
+        java-version: ${{ inputs.java_version }} # The JDK version to make available on the path.
+        java-package: ${{ inputs.java_package }} # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: ${{ inputs.architecture_type }} # (x64 or x86) - defaults to x64
+    - uses: expo/expo-github-action@v8
+      with:
+        eas-version: latest
+        expo-version: latest
+        token: ${{ secrets.EXPO_TOKEN }}
+    - name: Install deps
+      run: yarn install
+    - name: Build Android Local APK Bundle
+      run: yarn ${{ inputs.build_command }}
+
+  Push-to-Playstore:
+    needs: [Build-for-android]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ inputs.node_version }}
+    - uses: actions/setup-java@v1.4.3
+      with:
+        java-version: ${{ inputs.java_version }} # The JDK version to make available on the path.
+        java-package: ${{ inputs.java_package }} # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: ${{ inputs.architecture_type }} # (x64 or x86) - defaults to x64
+    - uses: expo/expo-github-action@v8
+      with:
+        eas-version: latest
+        expo-version: latest
+        token: ${{ secrets.EXPO_TOKEN }}
+    - name: Install deps
+      run: yarn install
+    - name: Upload to Google Play Console
+      run: yarn ${{ inputs.submit_command }}
