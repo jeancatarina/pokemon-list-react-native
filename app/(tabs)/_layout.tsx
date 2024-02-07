@@ -1,9 +1,9 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome"
-import { Link, Tabs } from "expo-router"
-import { Pressable, useColorScheme } from "react-native"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
-
-import Colors from "../../constants/Colors"
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Tabs } from "expo-router";
+import { connectToDevTools } from "react-devtools-core";
+import { useColorScheme } from "react-native";
+import Colors from "../../constants/Colors";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -17,6 +17,13 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
 	const colorScheme = useColorScheme()
+
+	// if (__DEV__) {
+	// 	connectToDevTools({
+	// 		host: "localhost",
+	// 		port: 8081,
+	// 	});
+	// }
 
 	return (
 		<Tabs

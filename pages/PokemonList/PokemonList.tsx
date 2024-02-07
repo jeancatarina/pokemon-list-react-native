@@ -1,11 +1,11 @@
 import { ActivityIndicator, Button, FlatList } from "react-native"
 
+import { FlashList } from "@shopify/flash-list"
+import { useCallback } from "react"
+import { Card } from "../../components/Card"
 import { Text, View } from "../../components/Themed"
 import usePokemonList from "./PokemonList.hooks"
 import { styles } from "./styles"
-import { Card } from "../../components/Card"
-import { useCallback } from "react"
-import { FlashList } from "@shopify/flash-list"
 
 export default function PokemonList() {
 	const {
