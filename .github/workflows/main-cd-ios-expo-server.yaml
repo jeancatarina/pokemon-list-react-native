@@ -1,4 +1,4 @@
-name: Main CD Android Expo
+name: Main CD Ios Expo
 
 on:
   workflow_call:
@@ -19,7 +19,7 @@ on:
         type: string
         default: x64
 jobs:
-  Build-for-android:
+  Build-for-ios:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -38,11 +38,11 @@ jobs:
         token: ${{ secrets.EXPO_TOKEN }}
     - name: Install deps
       run: yarn install
-    - name: Build Android APK Bundle
-      run: eas build --platform android
+    - name: Build Ios APK Bundle
+      run: eas build --platform ios
 
   Push-to-Playstore:
-    needs: [Build-for-android]
+    needs: [Build-for-ios]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -61,5 +61,5 @@ jobs:
         token: ${{ secrets.EXPO_TOKEN }}
     - name: Install deps
       run: yarn install
-    - name: Upload to Google Play Console
-      run: eas submit --platform android --latest
+    - name: Upload to Apple Store
+      run: eas submit --platform ios --latest

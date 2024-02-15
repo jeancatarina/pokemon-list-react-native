@@ -2,6 +2,10 @@ on:
   push:
     branches: [main]
 jobs:
-  continuous-deployment-main:
+  continuous-deployment-android:
     uses: ./.github/workflows/main-cd-android-local-build.yaml
     secrets: inherit
+  continuous-deployment-ios:
+    uses: ./.github/workflows/main-cd-ios-expo-server.yaml
+    secrets: inherit
+

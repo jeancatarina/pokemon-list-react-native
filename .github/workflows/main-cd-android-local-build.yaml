@@ -1,4 +1,4 @@
-name: Main CD Frontend
+name: Main CD Android Local
 
 on:
   workflow_call:
