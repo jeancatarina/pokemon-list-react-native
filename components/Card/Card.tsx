@@ -11,7 +11,7 @@ interface CardProps extends TouchableOpacityProps {
 }
 
 export const Card: FC<CardProps> = ({ children, onPress }) => {
-	return (
+	return (<TouchableOpacity onPress={onPress}>
 		<Box
 			padding="m"
 			backgroundColor="primaryCardBackground"
@@ -20,7 +20,7 @@ export const Card: FC<CardProps> = ({ children, onPress }) => {
 			borderWidth={1}
 			marginBottom="s"
 		>
-			<TouchableOpacity onPress={onPress}>{children}</TouchableOpacity>
-		</Box>
+			{children}
+		</Box></TouchableOpacity>
 	)
 }
