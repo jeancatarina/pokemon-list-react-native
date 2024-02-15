@@ -13,11 +13,11 @@ export const Container: FC<ContainerProps> = ({ children }) => {
 			flexGrow={1}
 			alignItems="center"
 			justifyContent="center"
-			marginLeft="g"
-			marginRight="g"
-			marginTop="m"
+			paddingLeft="g"
+			paddingRight="g"
+			paddingTop="m"
 		>
-			<Box flexGrow={1} width={"100%"}>
+			<Box flexGrow={1} width={"100%"} backgroundColor="mainBackground">
 				{children}
 			</Box>
 		</Box>

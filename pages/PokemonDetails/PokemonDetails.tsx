@@ -2,6 +2,7 @@ import React from "react"
 import { ActivityIndicator, Image, ScrollView } from "react-native"
 import { Card } from "../../components/Card"
 
+import { Container } from "components/Container"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { Box, Text } from "theme/theme"
 import { PokemonType } from "../../components/PokemonType"
@@ -71,9 +72,9 @@ const PokemonDetails = () => {
 	}
 
 	return (
-		<Box backgroundColor="mainBackground" style={styles.container}>
+		<Container>
 			<ScrollView>{getBody()}</ScrollView>
-		</Box>
+		</Container>
 	)
 }
 

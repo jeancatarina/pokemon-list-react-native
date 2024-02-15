@@ -2,18 +2,18 @@ import { ApolloProvider } from "@apollo/client"
 import FontAwesome from "@expo/vector-icons/FontAwesome"
 import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { client } from "../config/Apollo"
 import { useLoadGlobalData } from "../services/hooks/useLoadGlobalData"
 
-import { ThemeProvider, backgroundColor } from "@shopify/restyle"
+import { ThemeProvider } from "@shopify/restyle"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { useThemeStore } from "store/store"
 import { darkTheme, theme } from "theme/theme"
 
 export {
 	// Catch any errors thrown by the Layout component.
-	ErrorBoundary,
+	ErrorBoundary
 } from "expo-router"
 
 export const unstable_settings = {
