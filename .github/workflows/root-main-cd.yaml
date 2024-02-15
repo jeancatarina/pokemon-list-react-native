@@ -5,7 +5,7 @@ jobs:
   continuous-deployment-android:
     uses: ./.github/workflows/main-cd-android-local-build.yaml
     secrets: inherit
-  continuous-deployment-ios:
-    uses: ./.github/workflows/main-cd-ios-expo-server.yaml
-    secrets: inherit
+#   continuous-deployment-ios:
+#     uses: ./.github/workflows/main-cd-ios-expo-server.yaml
+#     secrets: inherit
 
