@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import { GET_POKEMONS } from "./PokemonList.query"
 
 export const usePokemonList = () => {
-	const [limit, setLimit] = useState(100)
+	const [limit, setLimit] = useState(15)
 	const [offset, setOffset] = useState(0)
 	const router = useRouter()
 	const { loading, error, data, fetchMore } = useQuery(GET_POKEMONS, {

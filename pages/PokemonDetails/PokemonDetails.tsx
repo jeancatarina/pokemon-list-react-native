@@ -1,7 +1,10 @@
-import { Card } from "../../components/Card"
 import React from "react"
-import { ActivityIndicator, Image, ScrollView, Text } from "react-native"
+import { ActivityIndicator, Image, ScrollView } from "react-native"
+import { Card } from "../../components/Card"
 
+import { Container } from "components/Container"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Box, Text } from "theme/theme"
 import { PokemonType } from "../../components/PokemonType"
 import usePokemonDetails from "./PokemonDetails.hooks"
 import { styles } from "./styles"
@@ -22,20 +25,20 @@ const PokemonDetails = () => {
 
 	const getName = () => (
 		<Card>
-			<Text>Nome: {pokemon?.name}</Text>
+			<Text color="primaryCardText">Nome: {pokemon?.name}</Text>
 		</Card>
 	)
 
 	const getImage = () => (
 		<Card>
-			<Text>Foto: </Text>
+			<Text color="primaryCardText">Foto: </Text>
 			<Image style={styles.image} source={{ uri: spriteUri }} />
 		</Card>
 	)
 
 	const getTypes = () => (
 		<Card>
-			<Text>Tipos: </Text>
+			<Text color="primaryCardText">Tipos: </Text>
 			{typeList?.map((type) => (
 				<PokemonType key={type.name} {...type} />
 			))}
@@ -45,9 +48,9 @@ const PokemonDetails = () => {
 	const getStats = () =>
 		statsList?.map((stat) => (
 			<Card key={stat.name}>
-				<Text>{`Nome status: ${stat.name}`}</Text>
-				<Text>{`Status base: ${stat.baseStat}`}</Text>
-				<Text>{`Esforço: ${stat.effort}`}</Text>
+				<Text color="primaryCardText">{`Nome status: ${stat.name}`}</Text>
+				<Text color="primaryCardText">{`Status base: ${stat.baseStat}`}</Text>
+				<Text color="primaryCardText">{`Esforço: ${stat.effort}`}</Text>
 			</Card>
 		))
 
@@ -65,10 +68,14 @@ const PokemonDetails = () => {
 	}
 
 	if (error) {
-		return <Text>Ops, erro ao buscar esse pokemon</Text>
+		return <Text color="primaryCardText">Ops, erro ao buscar esse pokemon</Text>
 	}
 
-	return <ScrollView style={styles.container}>{getBody()}</ScrollView>
+	return (
+		<Container>
+			<ScrollView>{getBody()}</ScrollView>
+		</Container>
+	)
 }
 
 export default PokemonDetails

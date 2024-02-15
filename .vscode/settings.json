@@ -17,5 +17,6 @@
 	"editor.defaultFormatter": "biomejs.biome",
 	"[yaml]": {
 		"editor.defaultFormatter": "kennylong.kubernetes-yaml-formatter"
-	}
+	},
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

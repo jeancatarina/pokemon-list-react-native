@@ -1,11 +1,11 @@
 import { ActivityIndicator, Button, FlatList } from "react-native"
 
-import { Text, View } from "../../components/Themed"
-import usePokemonList from "./PokemonList.hooks"
-import { styles } from "./styles"
-import { Card } from "../../components/Card"
-import { useCallback } from "react"
 import { FlashList } from "@shopify/flash-list"
+import { Container } from "components/Container"
+import { useCallback } from "react"
+import { Box, Text } from "theme/theme"
+import { Card } from "../../components/Card"
+import usePokemonList from "./PokemonList.hooks"
 
 export default function PokemonList() {
 	const {
@@ -20,7 +20,7 @@ export default function PokemonList() {
 	const getlistItem = useCallback(
 		({ item }) => (
 			<Card onPress={() => navigateToPokemonDetail(item.id)}>
-				<Text>{`${item.id} - ${item.name}`}</Text>
+				<Text color="primaryCardText">{`${item.id} - ${item.name}`}</Text>
 			</Card>
 		),
 		[navigateToPokemonDetail],
@@ -34,19 +34,17 @@ export default function PokemonList() {
 		)
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.view}>
-				<FlashList
-					estimatedItemSize={64}
-					data={pokemonData}
-					renderItem={getlistItem}
-					keyExtractor={(item) => item?.id?.toString()}
-					onEndReached={handleLoadMore}
-					onEndReachedThreshold={0.5}
-					contentContainerStyle={{ padding: 10 }}
-					ListFooterComponent={getListFooter}
-				/>
-			</View>
-		</View>
+		<Container>
+			<FlashList
+				estimatedItemSize={64}
+				data={pokemonData}
+				renderItem={getlistItem}
+				keyExtractor={(item) => item?.id?.toString()}
+				onEndReached={handleLoadMore}
+				onEndReachedThreshold={0.5}
+				contentContainerStyle={{ padding: 10 }}
+				ListFooterComponent={getListFooter}
+			/>
+		</Container>
 	)
 }
